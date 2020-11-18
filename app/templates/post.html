@@ -31,7 +31,7 @@
             {% if post.author.username == current_user.username %}
                 <a class="btn btn-danger pull-right margin20" onclick='return confirm("Are you sure you want to delete Post?");'
                         href="{{ url_for('delete_post', id = post.id) }}">Delete post</a>
-                <a class="btn btn-blog pull-right margin20" href="{{ url_for('update_post') }}">Update post</a>
+                <a class="btn btn-blog pull-right margin20" href="{{ url_for('update_post', id = post.id) }}">Update post</a>
             {% endif %}
         </div>
     </div>

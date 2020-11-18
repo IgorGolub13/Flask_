@@ -27,11 +27,17 @@ def dynamic_post(id):
     post = Post.query.filter_by(id=id).first()
     return render_template("post.html", post=post)
 
+
 @app.route('/delete_post/<int:id>')
+@login_required
 def delete_post(id):
     post = Post.query.filter_by(id=id).first()
-    db.session.delete(post)
-    db.session.commit()
+    if post.author == current_user:
+        db.session.delete(post)
+        db.session.commit()
+    else:
+        flash('You cant delete this post!', category='')
+        return redirect(url_for('post', id=id))
     return redirect(url_for('posts'))
 
 
@@ -43,25 +49,35 @@ def add_post():
         content = form.content.data
         user_id = current_user.id
         date_posted = dt.utcnow()
-        post = Post(title=title, content=content, user_id=user_id, date_posted = date_posted)
+        post = Post(title=title, content=content, user_id=user_id, date_posted=date_posted)
         db.session.add(post)
         db.session.commit()
         flash('New post added!', category='success')
         return redirect(url_for('posts'))
-    return render_template('add_post.html', form = form)
+    return render_template('add_post.html', form=form)
 
-@app.route('/posts/update_post', methods=['GET', 'POST'])
-def update_post():
+
+@app.route('/update_post/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update_post(id):
+    post = Post.query.get_or_404(id)
+    if post.author != current_user:
+        flash('Access!', category='danger')
+        return redirect(url_for('posts'))
     form = UpdatePost()
     if form.validate_on_submit():
-        current_user.title = form.title.data
-        current_user.content = form.content.data
-        current_user.user_id = current_user.id
-        current_user.date_posted = dt.utcnow()
+        post.title = form.title.data
+        post.content = form.content.data
+        post.date_posted = dt.utcnow()
+        db.session.add(post)
         db.session.commit()
         flash('Your post updated!', category='success')
         return redirect(url_for('posts'))
-    return render_template('update_post.html', form = form)
+    elif request.method == 'GET':
+        form.title.data = post.title
+        form.content.data = post.content
+    return render_template('update_post.html', form=form, id=id)
+
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():

@@ -22,7 +22,7 @@
                         <h3 class="panel-title">Please update your Post:</h3>
                     </div>
                     <div class="panel-body">
-                        <form method="post" action="{{ url_for('update_post') }}">
+                        <form method="post" action="{{ url_for('update_post', id = id) }}">
                             {{ form.hidden_tag() }}
                             <fieldset>
                                 <div class="form-group">
