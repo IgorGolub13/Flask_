@@ -1,0 +1,67 @@
+
+
+
+{% extends 'base.html' %}
+{% from "_render_field.html" import render_field %}
+
+{% for cat, msg in get_flashed_messages(True) %}
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-{{ cat }}">{{ msg }}</li>
+    </ul>
+{% endfor %}
+
+{% block content %}
+
+    <div class="container_1">
+        <img class="rounded-circle account-img" src="{{ image_file }}" width=90 style="margin:8px">
+    </div>
+
+    <div class="container_1">
+        <h2>Username: {{ current_user.username }}</h2>
+        <h2>Email: {{ current_user.email }}</h2><br>
+        <h4>Last seen: {{ current_user.last_seen.strftime("%d/%m/%y %H:%M:%S") }}</h4>
+        <h4>About me: {{ current_user.about_me }}</h4>
+    </div>
+
+    <div class="container">
+        <div class="col-md-4 col-md-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please update your data:</h3>
+                </div>
+                <div class="panel-body">
+                    <form method="POST" action="" enctype="multipart/form-data">
+                        {{ form.hidden_tag() }}
+                        <fieldset>
+                            <div class="form-group">
+                                {{ render_field(form.username, class='form-control', placeholder="Username") }}
+                            </div>
+                            <div class="form-group">
+                                {{ render_field(form.email, class='form-control', placeholder="E-mail") }}
+                            </div>
+                            <div class="form-group">
+                                {{ render_field(form.about_me, class='form-control', placeholder="About me..") }}
+                            </div>
+                            <div class="form-group">
+                                {{ render_field(form.password, class='form-control', placeholder="New Password") }}
+                            </div>
+                            <div class="form-group">
+                                {{ render_field(form.confirm_password, class='form-control', placeholder="Confirm new password") }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.picture.label() }}
+                                {{ form.picture(class = "form-control-file") }}
+                                {% if form.picture.errors %}
+                                    {% for error in form.picture.errors %}
+                                        <span class="text-danger">{{ error }}</span><br>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            {{ form.submit(class='btn btn-lg btn-success btn-block', value="Update") }}<br>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

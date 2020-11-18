@@ -1,0 +1,121 @@
+
+body {
+    background: url(http://mymaplist.com/img/parallax/back.png);
+    background-color: #444;
+    background: url(http://mymaplist.com/img/parallax/pinlayer2.png), url(http://mymaplist.com/img/parallax/pinlayer1.png), url(http://mymaplist.com/img/parallax/back.png);
+}
+
+.vertical-offset-100 {
+    padding-top: 100px;
+}
+
+.container_1 {
+    text-align: center;
+    font-style: italic;
+    color: #555555;
+    position: relative;
+    margin-bottom: 20px;
+
+}
+
+.container_2 {
+    color: #555555;
+    display: flex;
+}
+
+.button-wrapper {
+    display: flex;
+    margin-left: 710px;
+    margin-bottom: 18px;
+    margin-top: 18px;
+}
+
+.blogShort {
+    border-bottom: 1px solid #ddd;
+}
+
+.add {
+    background: #333;
+    padding: 10%;
+    height: 300px;
+}
+
+.nav-sidebar {
+    width: 100%;
+    padding: 8px 0;
+    border-right: 1px solid #ddd;
+}
+
+.nav-sidebar a {
+    color: #333;
+    -webkit-transition: all 0.08s linear;
+    -moz-transition: all 0.08s linear;
+    -o-transition: all 0.08s linear;
+    transition: all 0.08s linear;
+}
+
+.nav-sidebar .active a {
+    cursor: default;
+    background-color: #3A7734;
+    color: #fff;
+}
+
+.nav-sidebar .active a:hover {
+    background-color: #3A7734;
+}
+
+.nav-sidebar .text-overflow a,
+.nav-sidebar .text-overflow .media-body {
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.btn-blog {
+    color: #ffffff;
+    background-color: #3A7734;
+    border-color: #3A7734;
+    border-radius: 0;
+    margin-bottom: 10px
+}
+
+.btn-blog:hover,
+.btn-blog:focus,
+.btn-blog:active,
+.btn-blog.active,
+.open .dropdown-toggle.btn-blog {
+    color: white;
+    background-color: #3A7734;
+    border-color: #3A7734;
+}
+
+h2 {
+    color: gray
+}
+
+.margin10 {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.margin20 {
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+p1 {
+    font-style: italic;
+    font-size: 15px;
+    flood-color: #555555;
+}
+
+p2 {
+    font-style: inherit;
+    font-size: 20px;
+    flood-color: #555555;
+}

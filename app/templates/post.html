@@ -1,0 +1,40 @@
+
+
+
+{% extends "base.html" %}
+
+{% from "_render_field.html" import render_field %}
+
+{% for cat, msg in get_flashed_messages(True) %}
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-{{ cat }}">{{ msg }}</li>
+    </ul>
+{% endfor %}
+
+<!DOCTYPE html>
+{% block content %}
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+    <div class="container">
+        <div class="col-md-10 blogShort">
+
+            {#        <img src="{{ post.author.image_file }}">#}
+            <h2>{{ post.title }}</h2>
+            <p1>&nbsp Posted by {{ post.author.username }} - {{ post.date_posted }}</p1>
+            <br>
+            <p2>{{ post.content }}</p2>
+
+            {% if post.author.username == current_user.username %}
+                <a class="btn btn-danger pull-right margin20" onclick='return confirm("Are you sure you want to delete Post?");'
+                        href="{{ url_for('delete_post', id = post.id) }}">Delete post</a>
+                <a class="btn btn-blog pull-right margin20" href="{{ url_for('update_post') }}">Update post</a>
+            {% endif %}
+        </div>
+    </div>
+    </body>
+    </html>
+{% endblock %}

@@ -1,0 +1,61 @@
+
+
+
+{% extends "base.html" %}
+
+{% from "_render_field.html" import render_field %}
+
+{% for cat, msg in get_flashed_messages(True) %}
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-{{ cat }}">{{ msg }}</li>
+    </ul>
+{% endfor %}
+
+
+{% block content %}
+    <html>
+    <head>
+        {% if title %}
+            <title>{{ title }} - microblog</title>
+        {% else %}
+            <title>microblog</title>
+        {% endif %}
+    </head>
+    <body>
+    {#    <h1>Hi, {{ user.nickname }}!</h1>#}
+    {#    {% for post in posts %}#}
+    {#        <h1>{{ post.author.nickname }}</h1> says: <b>{{ post.body }}</b></p>#}
+    {#    {% endfor %}#}
+
+
+    <div class="container container_2">
+        {% if current_user.username %}
+            <h1>Hi {{ current_user.username }}!</h1>
+            <div class="button-wrapper">
+                <a class="btn btn-info " href="{{ url_for('add_post') }}"> + ADD NEW POST</a>
+            </div>
+        {% else %}
+            <h1>Hi Undefined User!</h1>
+        {% endif %}
+    </div>
+    <div class="container">
+        <div class="container">
+            <div id="blog" class="row">
+                {% for post in posts %}
+                    <div class="col-md-10 blogShort">
+                        {#                    <img src="{{ post.author.image_file }}">#}
+                        <h2>{{ post.title }}</h2>
+                        <p1>&nbsp Posted by {{ post.author.username }} - {{ post.date_posted }}</p1>
+                        <br>
+                        <p2>{{ post.content }}</p2>
+                        <a class="btn btn-blog pull-right margin10" href="{{ url_for('dynamic_post', id=post.id) }}">READ
+                            MORE</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
+
+{% endblock %}
