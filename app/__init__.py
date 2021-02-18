@@ -8,13 +8,10 @@ app = Flask(__name__)
 app.config.from_object('config')
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
-migrate = Migrate(app,db)
-
-# manager = Manager(app)
-# manager.add_command('db', MigrateCommand)
+migrate = Migrate(app, db)
 
 login_manager = LoginManager(app)
-login_manager.login_view =  'login'
+login_manager.login_view = 'login'
 login_manager.session_protection = 'strong'
 login_manager.login_message_category = 'info'
 

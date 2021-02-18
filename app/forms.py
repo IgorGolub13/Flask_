@@ -1,5 +1,3 @@
-
-
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
@@ -36,6 +34,7 @@ class RegistrationForm(FlaskForm):
         if user:
             raise ValidationError(f"Username already in use.")
 
+
 class LoginForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -48,10 +47,12 @@ class AddPost(FlaskForm):
     content = TextAreaField('Content')
     submit = SubmitField('Add Post')
 
+
 class UpdatePost(FlaskForm):
     title = StringField('Title')
     content = TextAreaField('Content')
     submit = SubmitField('Add Post')
+
 
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
@@ -72,13 +73,14 @@ class UpdateAccountForm(FlaskForm):
                                          DataRequired(message='Це поле обовязкове')])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg','png'])])
+    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update')
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError(f"That email is taken. Please choose a different one.")
+
     def validate_username(self, username):
         user = User.query.filter_by(username=username.data).first()
         if user:
