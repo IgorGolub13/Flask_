@@ -2,9 +2,9 @@
 
 {% block title %}
     {% if title %}
-        <title> {{ title }} - myblog</title>
+        <title> {{ title }}</title>
     {% else %}
-        <title>myblog</title>
+        <title></title>
     {% endif %}
 {% endblock %}
 
@@ -24,7 +24,9 @@
 {% endfor %}
 
 {% block content %}
-    <h1 class="important">Спеціальність - {{ name }}</h1>
+    <div class="container_1">
+        <h1 class="important">Students {{ name }}</h1>
+    </div>
 
     <div class="container_1">
         <ul class="list-unstyled">

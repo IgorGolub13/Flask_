@@ -12,14 +12,8 @@ from datetime import datetime as dt
 
 @app.route('/')
 def index():
-    return render_template('index.html', name='Прикладна математика',
-                           title='PNU')
-
-
-# @app.route('/secret')
-# @login_required
-# def secret():
-#     return 'Only authenticate users are allowed!'
+    return render_template('index.html', name='blog',
+                           title='blog')
 
 
 @app.route('/post/<int:id>')
@@ -85,11 +79,6 @@ def register():
         return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        # user = User.query.filter_by(email=form.email.data).first()
-        # if user:
-        #     flash(f'Акаунт вже існує {form.email.data}!', category='warning')
-        #     return redirect(url_for('register'))
-        # 2. зберегти дані з БД
         username = form.username.data
         email = form.email.data
         password_hash = form.password.data
